@@ -9,4 +9,3 @@ resource "aws_iam_account_password_policy" "password_policy" {
   require_uppercase_characters   = var.require_uppercase_characters
   require_symbols                = var.require_symbols
 }
-
