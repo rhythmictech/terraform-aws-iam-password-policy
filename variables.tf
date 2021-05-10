@@ -52,6 +52,3 @@ variable "require_uppercase_characters" {
   default     = true
   description = "Whether to require uppercase characters for user passwords."
 }
-
-
-
