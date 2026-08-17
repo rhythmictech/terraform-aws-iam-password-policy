@@ -1,20 +1,35 @@
 name: check
 on: [push, pull_request]
 
+permissions:
+  contents: read
+
 jobs:
-  build:
-    runs-on: macOS-latest
+  check:
+    runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@v1
+      - uses: actions/checkout@v7
 
-    - name: Install prereq
-      run: |
-        brew install docker tfenv tflint
-        tfenv install
+      - uses: hashicorp/setup-terraform@v4
+        with:
+          terraform_version: 1.15.8
+          terraform_wrapper: false
 
-    - name: tf fmt
-      run: |
-        terraform fmt
-    - name: tflint
-      run: |
-        tflint
+      - name: terraform fmt
+        run: terraform fmt -check -recursive -diff
+
+      - name: terraform validate
+        run: |
+          terraform init -backend=false
+          terraform validate
+
+      - uses: terraform-linters/setup-tflint@v6
+        with:
+          tflint_version: v0.64.0
+
+      - name: tflint
+        run: |
+          tflint --init
+          tflint --format compact
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
