@@ -1,0 +1,38 @@
+# Local .terraform directories
+**/.terraform/*
+
+# Provider lock file — this is a reusable module, so provider
+# selection belongs to the consuming root module
+.terraform.lock.hcl
+
+# State files
+*.tfstate
+*.tfstate.*
+.terraform.tfstate.lock.info
+
+# Crash log files
+crash.log
+crash.*.log
+
+# Variable files, which may contain sensitive data
+*.tfvars
+*.tfvars.json
+
+# Local override files
+override.tf
+override.tf.json
+*_override.tf
+*_override.tf.json
+
+# Plan output files
+*.tfplan
+
+# Terraform CLI configuration files
+.terraformrc
+terraform.rc
+
+# Claude Code session scratch
+.claude/sessions/
+
+# macOS
+.DS_Store
